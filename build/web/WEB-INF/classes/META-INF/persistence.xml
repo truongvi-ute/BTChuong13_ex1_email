@@ -13,7 +13,7 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/murach_db"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://dpg-d4jf338bdp1s73ft6f2g-a/murach_db?characterEncoding=UTF-8"/>
       <property name="javax.persistence.jdbc.user" value="murach_db_user"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="123"/>
