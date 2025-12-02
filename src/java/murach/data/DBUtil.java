@@ -10,38 +10,28 @@ public class DBUtil {
     private static final EntityManagerFactory emf;
     
     static {
-        try {
-            Map<String, String> properties = new HashMap<>();
-            
-            String dbUrl = System.getenv("DB_URL");
-            String dbUser = System.getenv("DB_USER");
-            String dbPass = System.getenv("DB_PASS");
+        Map<String, String> properties = new HashMap<>();
+        
+        String dbUrl = System.getenv("DB_URL");
+        String dbUser = System.getenv("DB_USER");
+        String dbPass = System.getenv("DB_PASS");
 
-            // --- DÒNG DEBUG QUAN TRỌNG ---
-            // In giá trị đọc được ra Log để kiểm tra
-            System.out.println("=== DEBUG RENDER ENV ===");
-            System.out.println("DB_URL read: " + dbUrl);
-            System.out.println("DB_USER read: " + dbUser);
-            // -----------------------------
-
-            if (dbUrl != null && !dbUrl.isEmpty()) {
-                // Logic ghép chuỗi kết nối
-                String finalUrl = "jdbc:postgresql://" + dbUrl;
-                System.out.println("Final JDBC URL: " + finalUrl); // In URL cuối cùng ra để soi lỗi
-                
-                properties.put("javax.persistence.jdbc.url", finalUrl);
-                properties.put("javax.persistence.jdbc.user", dbUser);
-                properties.put("javax.persistence.jdbc.password", dbPass);
+        if (dbUrl != null && !dbUrl.isEmpty()) {
+            // --- ĐOẠN CODE SỬA ĐỔI Ở ĐÂY ---
+            // Kiểm tra: Nếu URL từ Render chưa có "jdbc:postgresql://" thì mới thêm vào.
+            // Nếu có rồi (như trường hợp của bạn) thì giữ nguyên.
+            String finalUrl = dbUrl;
+            if (!dbUrl.startsWith("jdbc:postgresql://")) {
+                finalUrl = "jdbc:postgresql://" + dbUrl;
             }
-            
-            emf = Persistence.createEntityManagerFactory("emailListPU", properties);
-            
-        } catch (Throwable t) {
-            // Nếu có lỗi, in chi tiết ra Console của Render
-            System.err.println("!!! CRITICAL ERROR: KHONG THE KHOI TAO DBUTIL !!!");
-            t.printStackTrace(); // In toàn bộ lỗi ra
-            throw new ExceptionInInitializerError(t); // Báo cho Tomcat biết app đã hỏng
+            // -------------------------------
+
+            properties.put("javax.persistence.jdbc.url", finalUrl);
+            properties.put("javax.persistence.jdbc.user", dbUser);
+            properties.put("javax.persistence.jdbc.password", dbPass);
         }
+        
+        emf = Persistence.createEntityManagerFactory("emailListPU", properties);
     }
 
     public static EntityManagerFactory getEmFactory() {
