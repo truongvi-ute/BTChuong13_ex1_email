@@ -13,12 +13,12 @@
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://dpg-d4nq9h15pdvs73ac3hb0-a.singapore-postgres.render.com:5432/render_db_fagx?characterEncoding=UTF-8"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://dpg-d4nq9h15pdvs73ac3hb0-a.singapore-postgres.render.com:5432/render_db_fagx?sslmode=require"/>
       <property name="javax.persistence.jdbc.user" value="render_db_fagx_user"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="hVrfapv3nbQ2UUTecQDAXpoxDgpr8Mef"/>
 
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="none"/>
       
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>

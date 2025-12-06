@@ -45,6 +45,7 @@ public class UserDB {
         String qString = "SELECT u FROM User u WHERE u.email = :email";
         TypedQuery<User> q = em.createQuery(qString, User.class);
         q.setParameter("email", email);
+        q.setMaxResults(1); // Chỉ lấy 1 kết quả đầu tiên
         
         try {
             User user = q.getSingleResult();
